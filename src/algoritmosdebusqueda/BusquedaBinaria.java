@@ -2,7 +2,7 @@ package algoritmosdebusqueda;
 
 import java.util.Scanner;
 
-public class BusquedaLineal {
+public class BusquedaBinaria {
 
 	public static void main(String[] args) {
 		Scanner lector = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class BusquedaLineal {
 		System.out.print("Elemento a buscar en el arreglo: ");
 		int buscado = lector.nextInt();
 		
-		int resultado = BusquedaLinealDeEntero(A,A.length,buscado);
+		int resultado = BusquedaBinariaDeEntero(A,A.length,buscado);
 		
 		if (resultado != -1) {
 			System.out.println("El elemento " + buscado + " esta en la posicion " + resultado);
@@ -32,13 +32,18 @@ public class BusquedaLineal {
 		
 	}
 	
-	private static int BusquedaLinealDeEntero(int A[], int n, int buscado) {
-		int i = 0;
-		while(i < A.length) {
-			if (A[i] == buscado) {
-				return i;
-			}
-			i++;
+	private static int BusquedaBinariaDeEntero(int A[], int n, int buscado) {
+		int i_izq = 0;
+		int i_der = n - 1;
+		while(i_izq <= i_der) {
+			int i_medio = Math.round((i_izq + i_der)/2);
+			if (A[i_medio] == buscado) {
+				return i_medio;
+			} else if (A[i_medio] > buscado) {
+				i_der = i_medio - 1;
+			} else if (A[i_medio] < buscado) {
+				i_izq = i_medio + 1;
+			}			
 		}
 		return -1;
 	}
